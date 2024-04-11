@@ -52,6 +52,7 @@
     "preview": "vite preview",
     "lint": "eslint src",
     "test": "jest",
+    "test:e2e": "EXTENSION=keplr synpress run --configFile=test/e2e/synpress.config.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
   },
   "browserslist": {
@@ -69,6 +70,7 @@
   "devDependencies": {
     "@agoric/casting": "^0.4.3-u12.0",
     "@agoric/ertp": "^0.16.3-u12.0",
+    "@agoric/synpress": "^3.8.1",
     "@agoric/ui-components": "^0.3.9-u12.0",
     "@agoric/wallet": "^0.18.4-u12.0",
     "@emotion/babel-plugin": "^11.9.2",
