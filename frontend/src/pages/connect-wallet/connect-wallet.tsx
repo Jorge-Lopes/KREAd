@@ -44,9 +44,9 @@ export const ConnectWallet: FC = () => {
   const [showWidget, setShowWidget] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
-  useEffect(()=>{
-    if (service.status.walletProvisioned) navigate(routes.character);
-  },[service.status.walletProvisioned, navigate]);
+  // useEffect(()=>{
+  //   if (service.status.walletProvisioned) navigate(routes.character);
+  // },[service.status.walletProvisioned, navigate]);
 
   const toggleWidget = () => {
     setShowWidget(!showWidget);
