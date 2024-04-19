@@ -41,7 +41,7 @@ export const LeftEquippedItemCard: FC<EquippedItemCardProps> = ({
   };
 
   return (
-    <EquippedContainer onClick={() => handleClick()} isRight={false}>
+    <EquippedContainer id="leftEquippedItemCard" onClick={() => handleClick()} isRight={false}>
       <ItemCard
         position="left"
         area={area}
@@ -80,7 +80,7 @@ export const RightEquippedItemCard: FC<EquippedItemCardProps> = ({
   };
 
   return (
-    <EquippedContainer onClick={() => handleClick()} isRight isSecond={code === "perk 1" || code === "filter 1"}>
+    <EquippedContainer id="rightEquippedItemCard" onClick={() => handleClick()} isRight isSecond={code === "perk 1" || code === "filter 1"} >
       <ItemCard
         position="right"
         area={area}

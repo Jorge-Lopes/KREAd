@@ -114,6 +114,7 @@ export const ItemsMode: FC = () => {
             <HorizontalDivider />
             <CardActionsContainer>
               <PrimaryButton
+                id="unequipBotton"
                 disabled={disable.unequip}
                 onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                   unequip(event);

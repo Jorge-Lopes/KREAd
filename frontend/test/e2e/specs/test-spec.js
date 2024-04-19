@@ -109,5 +109,28 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         cy.visit('/shop/characters');
         cy.contains('test-e2e')
       });
+
+      it(`should create a second character`, () => {
+        cy.visit('/character');
+        cy.contains('create a new character').click();
+        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-2');
+        cy.contains('next').click();
+        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-2iorbx-StepContainer.eln6yby12 > div.css-st8xlq-StepWrapper.eln6yby10 > div > button').click();
+        cy.confirmTransaction().then((taskCompleted) => {
+          expect(taskCompleted).to.be.true;
+        });
+        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
+        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-1fwd4h0-ButtonContainer.eln6yby14 > button').click();
+      });
+
+      it(`should unequip mask`, () => {
+        cy.visit('/character');
+        cy.get('#leftEquippedItemCard').click()
+        cy.get('#unequipBotton').click();
+        cy.confirmTransaction().then((taskCompleted) => {
+          expect(taskCompleted).to.be.true;
+        });
+        cy.get('#unequipBotton').should('be.disabled');
+      });
     });
 });
