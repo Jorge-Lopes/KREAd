@@ -40,8 +40,10 @@ export const LeftEquippedItemCard: FC<EquippedItemCardProps> = ({
     setSelectedAsset(item?.name || "None");
   };
 
+  const id = item?.category ? `${item.category}Button` : "";
+
   return (
-    <EquippedContainer id="leftEquippedItemCard" onClick={() => handleClick()} isRight={false}>
+    <EquippedContainer id={id} onClick={() => handleClick()} isRight={false}>
       <ItemCard
         position="left"
         area={area}
@@ -79,8 +81,10 @@ export const RightEquippedItemCard: FC<EquippedItemCardProps> = ({
     setSelectedAsset(item?.name || "None");
   };
 
+  const id = item?.category ? `${item.category}Button` : "";
+
   return (
-    <EquippedContainer id="rightEquippedItemCard" onClick={() => handleClick()} isRight isSecond={code === "perk 1" || code === "filter 1"} >
+    <EquippedContainer id={id} onClick={() => handleClick()} isRight isSecond={code === "perk 1" || code === "filter 1"} >
       <ItemCard
         position="right"
         area={area}

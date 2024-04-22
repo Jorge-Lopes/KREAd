@@ -77,7 +77,7 @@ describe('DAPP Offer Up E2E Test Cases', () => {
       it(`should create new character`, () => {
         cy.visit('/character');
         cy.contains('create a new character').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e');
+        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-1');
         cy.contains('next').click();
         cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-2iorbx-StepContainer.eln6yby12 > div.css-st8xlq-StepWrapper.eln6yby10 > div > button').click();
         cy.confirmTransaction().then((taskCompleted) => {
@@ -101,6 +101,7 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         cy.confirmTransaction().then((taskCompleted) => {
           expect(taskCompleted).to.be.true;
         });
+        cy.get("#closeNotificationButton").click();
         cy.get('#root > div > div > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
         cy.get('#root > div > div > div.css-1aii2zd-ConfirmationContainer.ekici4y0 > div.css-1fkkbj3-ButtonContainer.ekici4y19 > button').click();
       });
@@ -123,14 +124,25 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-1fwd4h0-ButtonContainer.eln6yby14 > button').click();
       });
 
-      it(`should unequip mask`, () => {
+      it(`should unequip Item`, () => {
         cy.visit('/character');
-        cy.get('#leftEquippedItemCard').click()
-        cy.get('#unequipBotton').click();
+        cy.get('#maskButton').click()
+        cy.get('#unequipButton').click();
         cy.confirmTransaction().then((taskCompleted) => {
           expect(taskCompleted).to.be.true;
         });
-        cy.get('#unequipBotton').should('be.disabled');
+        cy.get("#closeNotificationButton").click();
+        cy.get('#unequipButton').should('be.disabled');
+      });
+
+      it(`should equip Item`, () => {
+        cy.get("#unequippedItemButton").click();
+        cy.get('#equipButton').click();
+        cy.confirmTransaction().then((taskCompleted) => {
+          expect(taskCompleted).to.be.true;
+        });
+        cy.get("#closeNotificationButton").click();
+        cy.get('#equipButton').should('be.disabled');
       });
     });
 });

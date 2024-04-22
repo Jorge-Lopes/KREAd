@@ -114,7 +114,7 @@ export const ItemsMode: FC = () => {
             <HorizontalDivider />
             <CardActionsContainer>
               <PrimaryButton
-                id="unequipBotton"
+                id="unequipButton"
                 disabled={disable.unequip}
                 onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                   unequip(event);
@@ -123,6 +123,7 @@ export const ItemsMode: FC = () => {
                 <ButtonText customColor={color.white}>unequip</ButtonText>
               </PrimaryButton>
               <PrimaryButton
+                id="equipButton"
                 disabled={disable.equip}
                 onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                   equip(event);
