@@ -40,7 +40,8 @@
     "start": "agoric start -v",
     "open:wallet": "agoric open --repl",
     "deploy:contract": "agoric deploy contract/nft-maker-contract-deploy.js api/nft-maker-deploy-api.js",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "start:docker": "docker compose up -d"
   },
   "prettier": {
     "trailingComma": "all",

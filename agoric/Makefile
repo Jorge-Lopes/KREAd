@@ -191,3 +191,30 @@ bootstrap:
 fund+provision:
 	make provision-account; \
 	make fund-account; \
+
+
+## targets extracted from agoric makefile
+
+USER1ADDR=$(shell agd keys show user1 -a --keyring-backend="test")
+ACCT_ADDR=$(USER1ADDR)
+
+ATOM_DENOM=ibc/BA313C4A19DFBF943586C0387E6B11286F9E416B4DD27574E6909CABE0E342FA
+ATOM=000000$(ATOM_DENOM)
+
+FUNDS=321$(BLD)
+SIGN_BROADCAST_OPTS=--keyring-backend=test --chain-id=$(CHAINID) \
+		--gas=auto --gas-adjustment=$(GAS_ADJUSTMENT) \
+		--yes -b block
+        
+
+mint100:
+	make FUNDS=1000$(ATOM) fund-acct
+	cd /usr/src/agoric-sdk && \
+		yarn --silent agops vaults open --wantMinted 100 --giveCollateral 100 >/tmp/want-ist.json && \
+		yarn --silent agops perf satisfaction --executeOffer /tmp/want-ist.json --from user1 --keyring-backend=test
+
+fund-acct:
+	agd tx bank send validator $(ACCT_ADDR) $(FUNDS) \
+	  $(SIGN_BROADCAST_OPTS) \
+	  -o json >,tx.json
+	jq '{code: .code, height: .height}' ,tx.json
