@@ -2,10 +2,9 @@
 
 describe('DAPP Offer Up E2E Test Cases', () => {
     context('Test commands', () => {
-      it(`should complete Keplr setup by importing an existing wallet using 24 word phrase`, () => {
+      it(`should complete Keplr setup by importing an existing wallet using private key`, () => {
         cy.setupWallet({
-          secretWords:
-          'river bargain mirror again moon sell romance attend fatal odor stove gold when canoe name basket ladder latin tag sad swear school yellow replace',
+          privateKey: Cypress.env('PRIVATE_KEY'),
           password : 'Test1234',
           newAccount: true,
           walletName: 'Kread test wallet',
@@ -23,20 +22,20 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         cy.acceptAccess().then(taskCompleted => {
           expect(taskCompleted).to.be.true;
         });
-  
+
         cy.origin('https://wallet.agoric.app/', () => {
           cy.visit('/wallet/');
-  
+
           cy.get('input.PrivateSwitchBase-input').click();
           cy.contains('Proceed').click();
-  
+
           cy.get('button[aria-label="Settings"]').click();
-  
+
           cy.get('#demo-simple-select').click();
           cy.get('li[data-value="local"]').click();
           cy.contains('button', 'Connect').click();
         });
-  
+
         cy.acceptAccess().then(taskCompleted => {
           expect(taskCompleted).to.be.true;
         });
@@ -47,29 +46,20 @@ describe('DAPP Offer Up E2E Test Cases', () => {
           expect(walletAddress.length).to.be.equal(45);
         });
       });
-      
+
       it(`should get the accurate values for the tokens in the wallet`, () => {
         cy.getTokenAmount('BLD').then(tokenValue => {
-          expect(tokenValue).to.equal(30);
+          expect(tokenValue).to.gte(5); // For tx fees
         });
         cy.getTokenAmount('IST').then(tokenValue => {
-          expect(tokenValue).to.equal(60);
+          expect(tokenValue).to.gte(20);
         });
       });
-  
+
       it(`should accept connection with wallet`, () => {
         cy.visit('/');
         cy.contains('connect Keplr Wallet').click();
         cy.acceptAccess().then(taskCompleted => {
-          expect(taskCompleted).to.be.true;
-        });
-      });
-
-      // this test should be removed. workaround to activate wallet
-      it(`should activate smart wallet`, () => {
-        cy.visit('/connect-wallet')
-        cy.contains('activate Wallet').click();
-        cy.confirmTransaction().then((taskCompleted) => {
           expect(taskCompleted).to.be.true;
         });
       });
