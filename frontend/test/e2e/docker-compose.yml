@@ -34,7 +34,7 @@ services:
       - GITHUB_REF=${GITHUB_REF}
       - GITHUB_BASE_REF=${GITHUB_BASE_REF}
       - GITHUB_HEAD_REF=${GITHUB_HEAD_REF}
-      - SECRET_WORDS="orbit bench unit task food shock brand bracket domain regular warfare company announce wheel grape trust sphere boy doctor half guard ritual three ecology"
+      - SECRET_WORDS="river bargain mirror again moon sell romance attend fatal odor stove gold when canoe name basket ladder latin tag sad swear school yellow replace"
     depends_on:
       - display
       - video
