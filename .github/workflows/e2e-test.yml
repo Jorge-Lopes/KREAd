@@ -31,12 +31,12 @@ jobs:
           node-version: "18.19.0"
       - name: yarn install
         run: yarn
+      - name: yarn build
+        working-directory: ./agoric
+        run: yarn build
       - name: yarn start:docker
         working-directory: ./agoric
         run: yarn start:docker
-      - name: yarn build
-        run: yarn build
-      
       - name: Install linux deps
         run: |
           sudo apt-get install --no-install-recommends -y \
