@@ -29,14 +29,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18.19.0"
-      - name: yarn install
-        run: yarn
-      - name: yarn build
+      - name: contract yarn install
         working-directory: ./agoric
-        run: yarn build
+        run: yarn
+      - name: frontend yarn install
+        working-directory: ./frontend
+        run: yarn
       - name: yarn start:docker
         working-directory: ./agoric
         run: yarn start:docker
+      - name: yarn build
+        working-directory: ./frontend
+        run: yarn build
       - name: Install linux deps
         run: |
           sudo apt-get install --no-install-recommends -y \
@@ -51,10 +55,10 @@ jobs:
           DISPLAY: :0.0
             
       - name: Run e2e tests
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@248bde77443c376edc45906ede03a1aba9da0462
         with:
           start: npx serve ui/dist -p 5173
-          command: yarn test:e2e
+          command: cd frontend && yarn test:e2e
           wait-on: 'http://localhost:5173'
           wait-on-timeout: 120
           browser: chrome
