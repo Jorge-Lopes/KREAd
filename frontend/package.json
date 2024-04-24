@@ -1,6 +1,9 @@
 {
   "name": "@builder/frontend",
   "version": "0.1.0",
+  "workspaces": [
+    "test"
+  ],
   "dependencies": {
     "@agoric/rpc": "^0.6.0",
     "@agoric/smart-wallet": "^0.5.4-u12.0",
@@ -54,7 +57,8 @@
     "test": "jest",
     "test:e2e": "EXTENSION=keplr synpress run --configFile=test/e2e/synpress.config.js",
     "test:e2e:ci": "start-server-and-test 'yarn dev' http-get://localhost:5173 'yarn test:e2e'",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
+    "start:docker": "cd test/e2e/ && docker compose up -d"
   },
   "browserslist": {
     "production": [
