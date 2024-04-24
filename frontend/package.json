@@ -1,9 +1,7 @@
 {
   "name": "@builder/frontend",
   "version": "0.1.0",
-  "workspaces": [
-    "test"
-  ],
+
   "dependencies": {
     "@agoric/rpc": "^0.6.0",
     "@agoric/smart-wallet": "^0.5.4-u12.0",
