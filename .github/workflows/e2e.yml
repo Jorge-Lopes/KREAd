@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Use Node.js 18.8.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          # use node 18.8.x until Agoric/agoric-sdk#8636
           node-version: "18.8.x"
+          cache: 'yarn'
       - name: yarn install
         run: yarn
   integration:
@@ -31,6 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18.18"
+          cache: 'yarn'
       - name: yarn install
         run: yarn
       - name: yarn start:docker
