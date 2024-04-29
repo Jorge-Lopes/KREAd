@@ -73,7 +73,7 @@ jobs:
         with:
           working-directory: ./frontend
           start: yarn dev
-          command: yarn test:e2e
+          command: PRIVATE_KEY="f20cbc1d201e368f32f2370701f3f4575063986b1dc9364cd8f01f278c9192bc" yarn test:e2e 
           wait-on: 'http://localhost:5173'
           wait-on-timeout: 120
           browser: chrome
