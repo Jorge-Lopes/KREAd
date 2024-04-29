@@ -64,7 +64,28 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         });
       });
 
+      it('should buy selected item', () => {
+        cy.visit('/shop/items');
+
+        const form = cy.get('#hello').children().first().find(
+          '[data-cy="button"]').click().get('[data-cy="buy-offer"]');
+
+        form.should('exist').click();
+
+        cy.confirmTransaction().then((taskCompleted) => {
+          expect(taskCompleted).to.be.true;
+        });
+
+        cy.get('#closeNotificationButton').click();
+
+        cy.get('[data-cy="buy-confirm"]').should('be.enabled').click();
+
+        cy.get('[data-cy="confirm-check"]').click();
+
+      });
+
       it(`should create new character`, () => {
+        debugger
         cy.visit('/character');
         cy.contains('create a new character').click();
         cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-1');

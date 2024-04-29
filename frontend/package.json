@@ -52,7 +52,8 @@
     "preview": "vite preview",
     "lint": "eslint src",
     "test": "jest",
-    "test:e2e": "EXTENSION=keplr synpress run --configFile=test/e2e/synpress.config.js",
+    "test:e2e": "EXTENSION=keplr synpress run --configFile=test/e2e/synpress.config.js --noExit",
+    "test:ope2e": "EXTENSION=keplr synpress open --configFile=test/e2e/synpress.config.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
   },
   "browserslist": {

@@ -67,7 +67,7 @@ export const BuyForm: FC<BuyFormProps> = ({ data, changeStep, isLoading, onSubmi
             {isOnFirstStep && <PriceInIst price={data.price} />}
           </PricingContainer>
           {isOnFirstStep && (
-            <PrimaryButton onClick={() => onSendOfferClickHandler()} disabled={isDisabled || notEnoughIST}>
+            <PrimaryButton data-cy={"buy-offer"} onClick={() => onSendOfferClickHandler()} disabled={isDisabled || notEnoughIST}>
               <ButtonText customColor={color.white}>{text.mint.sendOffer}</ButtonText>
             </PrimaryButton>
           )}
@@ -91,7 +91,7 @@ export const BuyForm: FC<BuyFormProps> = ({ data, changeStep, isLoading, onSubmi
             <ButtonText customColor={color.white}>{text.mint.confirm}</ButtonText>
           </PrimaryButton>
         ) : (
-          <PrimaryButton onClick={() => changeStep(CONFIRMATION_STEP)} disabled={changeStepDisabled.step2}>
+          <PrimaryButton data-cy={"buy-confirm"} onClick={() => changeStep(CONFIRMATION_STEP)} disabled={changeStepDisabled.step2}>
             <ButtonText customColor={color.white}>{text.mint.confirm}</ButtonText>
             {isLoading ? <LoadingPage /> : <ArrowUp />}
           </PrimaryButton>
