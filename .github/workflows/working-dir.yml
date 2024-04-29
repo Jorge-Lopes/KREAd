@@ -12,7 +12,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: $GITHUB_WORKSPACE/frontend
+        working-directory: ./frontend
 
     steps:
       - name: Checkout Repository
