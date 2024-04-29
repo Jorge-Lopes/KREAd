@@ -8,22 +8,27 @@ on:
 jobs:
   unit:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         shell: bash
         working-directory: ./frontend
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Print Working Directory
         run: pwd
-      - name: Checkout Repo
-        uses: actions/checkout@v4
+
       - name: Use Node.js 18.8.x
         uses: actions/setup-node@v4
         with:
           node-version: "18.8.x"
-          cache: 'yarn'
+
       - name: yarn install
         run: yarn
+
   integration:
     runs-on: ubuntu-latest
     defaults:
