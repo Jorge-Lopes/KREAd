@@ -31,27 +31,36 @@ jobs:
 
   integration:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         shell: bash
         working-directory: ./frontend
+
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Print Working Directory
+        run: pwd
+
       - name: Use Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: "18.18"
-          cache: 'yarn'
+
       - name: yarn install
         run: yarn
+
       - name: yarn start:docker
         run: yarn start:docker
+
       - name: Install linux deps
         run: |
           sudo apt-get install --no-install-recommends -y \
           fluxbox \
           xvfb
+          
       - name: Run xvfb and fluxbox
         run: |
           Xvfb :0 -screen 0 1024x768x24 -listen tcp -ac &
