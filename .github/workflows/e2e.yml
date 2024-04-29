@@ -5,12 +5,13 @@ on:
     branches:
       - 'jorge/e2e-workflow'
 
+defaults:
+  run:
+    working-directory: frontend
+
 jobs:
   unit:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -18,13 +19,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18.8.x"
+          cache: 'yarn'
       - name: yarn install
         run: yarn
   integration:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -32,6 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18.18"
+          cache: 'yarn'
       - name: yarn install
         run: yarn
       - name: yarn start:docker
@@ -41,7 +41,6 @@ jobs:
           sudo apt-get install --no-install-recommends -y \
           fluxbox \
           xvfb
-
       - name: Run xvfb and fluxbox
         run: |
           Xvfb :0 -screen 0 1024x768x24 -listen tcp -ac &
