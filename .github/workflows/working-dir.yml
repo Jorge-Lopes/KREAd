@@ -9,22 +9,16 @@ jobs:
   unit:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        shell: bash
+        working-directory: $GITHUB_WORKSPACE/frontend
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Change to frontend directory
-        run: cd $GITHUB_WORKSPACE/frontend
-
       - name: Print Working Directory
         run: pwd
-
-      - name: List contents of GITHUB_WORKSPACE
-        run: ls -al $GITHUB_WORKSPACE
-
-      - name: Debug Information
-        run: |
-          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-          ls -al $GITHUB_WORKSPACE
           
 
