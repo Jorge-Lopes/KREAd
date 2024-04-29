@@ -1,4 +1,4 @@
-name: E2E Test
+name: Working Dir
 
 on:
   push:
@@ -8,10 +8,13 @@ on:
 jobs:
   unit:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Change to frontend directory
+        run: cd frontend
+
       - name: Print Working Directory
         run: pwd
