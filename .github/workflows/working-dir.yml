@@ -1,0 +1,17 @@
+name: E2E Test
+
+on:
+  push:
+    branches:
+      - 'jorge/e2e-workflow'
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Print Working Directory
+        run: pwd
