@@ -13,6 +13,8 @@ jobs:
   unit:
     runs-on: ubuntu-latest
     steps:
+      - name: Print Working Directory
+        run: pwd
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Use Node.js 18.8.x
