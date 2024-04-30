@@ -79,6 +79,7 @@ jobs:
           browser: chrome
         env:
           DISPLAY: :0.0
+          CYPRESS_PRIVATE_KEY: "f20cbc1d201e368f32f2370701f3f4575063986b1dc9364cd8f01f278c9192bc"
           PRIVATE_KEY: "f20cbc1d201e368f32f2370701f3f4575063986b1dc9364cd8f01f278c9192bc"
 
       - name: Archive e2e artifacts
