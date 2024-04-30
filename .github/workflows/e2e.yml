@@ -1,0 +1,96 @@
+name: E2E
+
+on:
+  push:
+    branches:
+      - 'jorge/e2e-ci-workflow'
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./frontend
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: Use Node.js 18.8.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.8.x"
+
+      - name: yarn install
+        run: yarn
+
+  integration:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./frontend
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.18"
+      
+      - name: yarn install
+        run: yarn
+
+      - name: yarn start:docker
+        run: yarn start:docker
+
+      - name: yarn docker:print-key
+        run: yarn docker:print-key
+
+      - name: Install linux deps
+        run: |
+          sudo apt-get install --no-install-recommends -y \
+          fluxbox \
+          xvfb
+
+      - name: Run xvfb and fluxbox
+        run: |
+          Xvfb :0 -screen 0 1024x768x24 -listen tcp -ac &
+          fluxbox &
+        env:
+          DISPLAY: :0.0
+            
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./frontend
+          start: yarn dev
+          command: yarn test:e2e 
+          wait-on: 'http://localhost:5173'
+          wait-on-timeout: 120
+          browser: chrome
+        env:
+          DISPLAY: :0.0
+          CYPRESS_PRIVATE_KEY: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069"
+          PRIVATE_KEY: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069"
+
+      - name: Archive e2e artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-artifacts
+          path: |
+              frontend/test/e2e/videos
+              frontend/test/e2e/screenshots
+        continue-on-error: true
