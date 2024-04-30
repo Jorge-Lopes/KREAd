@@ -43,7 +43,7 @@ describe('KREAd E2E Test Cases', () => {
 
       it(`should get wallet address for Agoric`, () => {
         cy.getWalletAddress('Agoric wallet').then(walletAddress => {
-          cy.task('log', `Wallet address: ${walletAddress}`);
+          return cy.task('info', `Wallet address: ${walletAddress}`);
         });
       });
 
