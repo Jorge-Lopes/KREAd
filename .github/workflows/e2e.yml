@@ -84,8 +84,8 @@ jobs:
           browser: chrome
         env:
           DISPLAY: :0.0
-          CYPRESS_PRIVATE_KEY: "f20cbc1d201e368f32f2370701f3f4575063986b1dc9364cd8f01f278c9192bc"
-          PRIVATE_KEY: "f20cbc1d201e368f32f2370701f3f4575063986b1dc9364cd8f01f278c9192bc"
+          CYPRESS_PRIVATE_KEY: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069"
+          PRIVATE_KEY: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069"
 
       - name: Archive e2e artifacts
         uses: actions/upload-artifact@v4

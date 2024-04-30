@@ -4,7 +4,7 @@ describe('KREAd E2E Test Cases', () => {
     context('Test commands', () => {
       it(`should complete Keplr setup by importing an existing wallet using private key`, () => {
         cy.setupWallet({
-          privateKey: "f20cbc1d201e368f32f2370701f3f4575063986b1dc9364cd8f01f278c9192bc",
+          privateKey: Cypress.env('PRIVATE_KEY'),
           password : 'Test1234',
           newAccount: true,
           walletName: 'Kread test wallet',
