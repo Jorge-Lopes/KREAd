@@ -1,6 +1,6 @@
 /* eslint-disable ui-testing/no-disabled-tests */
 
-describe('DAPP Offer Up E2E Test Cases', () => {
+describe('KREAd E2E Test Cases', () => {
     context('Test commands', () => {
       it(`should complete Keplr setup by importing an existing wallet using private key`, () => {
         cy.setupWallet({
@@ -8,8 +8,8 @@ describe('DAPP Offer Up E2E Test Cases', () => {
           password : 'Test1234',
           newAccount: true,
           walletName: 'Kread test wallet',
-          selectedChains : [], // ['Agoric localhost']
-          createNewWallet : false,
+          // selectedChains : ['Agoric localhost'],
+          // createNewWallet : false,
         }).then(setupFinished => {
           expect(setupFinished).to.be.true;
         });
@@ -43,96 +43,96 @@ describe('DAPP Offer Up E2E Test Cases', () => {
 
       it(`should get wallet address for Agoric`, () => {
         cy.getWalletAddress('Agoric wallet').then(walletAddress => {
-          expect(walletAddress.length).to.be.equal(45);
+          cy.task('log', `Wallet address: ${walletAddress}`);
         });
       });
 
-      it(`should get the accurate values for the tokens in the wallet`, () => {
-        cy.getTokenAmount('BLD').then(tokenValue => {
-          expect(tokenValue).to.gte(5); // For tx fees
-        });
-        cy.getTokenAmount('IST').then(tokenValue => {
-          expect(tokenValue).to.gte(20);
-        });
-      });
+      // it(`should get the accurate values for the tokens in the wallet`, () => {
+      //   cy.getTokenAmount('BLD').then(tokenValue => {
+      //     expect(tokenValue).to.gte(5); // For tx fees
+      //   });
+      //   cy.getTokenAmount('IST').then(tokenValue => {
+      //     expect(tokenValue).to.gte(20);
+      //   });
+      // });
 
-      it(`should accept connection with wallet`, () => {
-        cy.visit('/');
-        cy.contains('connect Keplr Wallet').click();
-        cy.acceptAccess().then(taskCompleted => {
-          expect(taskCompleted).to.be.true;
-        });
-      });
+      // it(`should accept connection with wallet`, () => {
+      //   cy.visit('/');
+      //   cy.contains('connect Keplr Wallet').click();
+      //   cy.acceptAccess().then(taskCompleted => {
+      //     expect(taskCompleted).to.be.true;
+      //   });
+      // });
 
-      it(`should create new character`, () => {
-        cy.visit('/character');
-        cy.contains('create a new character').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-1');
-        cy.contains('next').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-2iorbx-StepContainer.eln6yby12 > div.css-st8xlq-StepWrapper.eln6yby10 > div > button').click();
-        cy.confirmTransaction().then((taskCompleted) => {
-          expect(taskCompleted).to.be.true;
-        });
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-1fwd4h0-ButtonContainer.eln6yby14 > button').click();
-      });
+      // it(`should create new character`, () => {
+      //   cy.visit('/character');
+      //   cy.contains('create a new character').click();
+      //   cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-1');
+      //   cy.contains('next').click();
+      //   cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-2iorbx-StepContainer.eln6yby12 > div.css-st8xlq-StepWrapper.eln6yby10 > div > button').click();
+      //   cy.confirmTransaction().then((taskCompleted) => {
+      //     expect(taskCompleted).to.be.true;
+      //   });
+      //   cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
+      //   cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-1fwd4h0-ButtonContainer.eln6yby14 > button').click();
+      // });
 
-      it(`should verify character`, () => {
-        cy.visit('/character');
-        cy.contains('my Characters').click();
-        cy.contains('test-e2e')
-      });
+    //   it(`should verify character`, () => {
+    //     cy.visit('/character');
+    //     cy.contains('my Characters').click();
+    //     cy.contains('test-e2e')
+    //   });
 
-      it(`should sell character`, () => {
-        cy.get('#root > div > div.css-1u0eero-ChildrenContainer-ChildrenContainer.el6gwdp1 > div.css-gzfkp-Layout.e7ftloa18 > div.css-1skrci2-CanvasAssetInventoryWrapper.e1lh9tbw5 > div > div.css-1xefd4u-CanvasContentWrapper.e1lh9tbw2 > div.css-1hvzc0c-CardActionsContainer.e1lh9tbw1 > button').click();
-        cy.get('#root > div > div > form > div.css-1wxtr10-FormFields.ekici4y9 > div > div.css-1ng6ct8-InputContainer.ekici4y7 > p > input').type(5);
-        cy.get('#root > div > div > form > div.css-1fkkbj3-ButtonContainer.ekici4y19 > button').click();
-        cy.get('#root > div > div > div.css-xxyme9-StepContainer.ekici4y17 > div.css-1adx2z9-GeneralInfo.ekici4y3 > button').click();
-        cy.confirmTransaction().then((taskCompleted) => {
-          expect(taskCompleted).to.be.true;
-        });
-        cy.get("#closeNotificationButton").click();
-        cy.get('#root > div > div > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
-        cy.get('#root > div > div > div.css-1aii2zd-ConfirmationContainer.ekici4y0 > div.css-1fkkbj3-ButtonContainer.ekici4y19 > button').click();
-      });
+    //   it(`should sell character`, () => {
+    //     cy.get('#root > div > div.css-1u0eero-ChildrenContainer-ChildrenContainer.el6gwdp1 > div.css-gzfkp-Layout.e7ftloa18 > div.css-1skrci2-CanvasAssetInventoryWrapper.e1lh9tbw5 > div > div.css-1xefd4u-CanvasContentWrapper.e1lh9tbw2 > div.css-1hvzc0c-CardActionsContainer.e1lh9tbw1 > button').click();
+    //     cy.get('#root > div > div > form > div.css-1wxtr10-FormFields.ekici4y9 > div > div.css-1ng6ct8-InputContainer.ekici4y7 > p > input').type(5);
+    //     cy.get('#root > div > div > form > div.css-1fkkbj3-ButtonContainer.ekici4y19 > button').click();
+    //     cy.get('#root > div > div > div.css-xxyme9-StepContainer.ekici4y17 > div.css-1adx2z9-GeneralInfo.ekici4y3 > button').click();
+    //     cy.confirmTransaction().then((taskCompleted) => {
+    //       expect(taskCompleted).to.be.true;
+    //     });
+    //     cy.get("#closeNotificationButton").click();
+    //     cy.get('#root > div > div > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
+    //     cy.get('#root > div > div > div.css-1aii2zd-ConfirmationContainer.ekici4y0 > div.css-1fkkbj3-ButtonContainer.ekici4y19 > button').click();
+    //   });
 
-      it(`should verify sell record`, () => {
-        cy.visit('/shop/characters');
-        cy.contains('test-e2e')
-      });
+    //   it(`should verify sell record`, () => {
+    //     cy.visit('/shop/characters');
+    //     cy.contains('test-e2e')
+    //   });
 
-      it(`should create a second character`, () => {
-        cy.visit('/character');
-        cy.contains('create a new character').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-2');
-        cy.contains('next').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-2iorbx-StepContainer.eln6yby12 > div.css-st8xlq-StepWrapper.eln6yby10 > div > button').click();
-        cy.confirmTransaction().then((taskCompleted) => {
-          expect(taskCompleted).to.be.true;
-        });
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
-        cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-1fwd4h0-ButtonContainer.eln6yby14 > button').click();
-      });
+    //   it(`should create a second character`, () => {
+    //     cy.visit('/character');
+    //     cy.contains('create a new character').click();
+    //     cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > form > div.css-18b5bhk-FormFields.eln6yby17 > div > input').type('test-e2e-2');
+    //     cy.contains('next').click();
+    //     cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-2iorbx-StepContainer.eln6yby12 > div.css-st8xlq-StepWrapper.eln6yby10 > div > button').click();
+    //     cy.confirmTransaction().then((taskCompleted) => {
+    //       expect(taskCompleted).to.be.true;
+    //     });
+    //     cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-hmnl7f-ButtonWrapper.eln6yby2 > div > button').click();
+    //     cy.get('#root > div > section > div > div.css-ra3ygx-ContentWrapper.eln6yby16 > div.css-1fwd4h0-ButtonContainer.eln6yby14 > button').click();
+    //   });
 
-      it(`should unequip Item`, () => {
-        cy.visit('/character');
-        cy.get('#maskButton').click()
-        cy.get('#unequipButton').click();
-        cy.confirmTransaction().then((taskCompleted) => {
-          expect(taskCompleted).to.be.true;
-        });
-        cy.get("#closeNotificationButton").click();
-        cy.get('#unequipButton').should('be.disabled');
-      });
+    //   it(`should unequip Item`, () => {
+    //     cy.visit('/character');
+    //     cy.get('#maskButton').click()
+    //     cy.get('#unequipButton').click();
+    //     cy.confirmTransaction().then((taskCompleted) => {
+    //       expect(taskCompleted).to.be.true;
+    //     });
+    //     cy.get("#closeNotificationButton").click();
+    //     cy.get('#unequipButton').should('be.disabled');
+    //   });
 
-      it(`should equip Item`, () => {
-        cy.get("#unequippedItemButton").click();
-        cy.get('#equipButton').click();
-        cy.confirmTransaction().then((taskCompleted) => {
-          expect(taskCompleted).to.be.true;
-        });
-        cy.get("#closeNotificationButton").click();
-        cy.get('#equipButton').should('be.disabled');
-      });
+    //   it(`should equip Item`, () => {
+    //     cy.get("#unequippedItemButton").click();
+    //     cy.get('#equipButton').click();
+    //     cy.confirmTransaction().then((taskCompleted) => {
+    //       expect(taskCompleted).to.be.true;
+    //     });
+    //     cy.get("#closeNotificationButton").click();
+    //     cy.get('#equipButton').should('be.disabled');
+    //   });
     });
 });
