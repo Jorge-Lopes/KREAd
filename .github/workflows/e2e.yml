@@ -57,6 +57,9 @@ jobs:
       - name: yarn start:docker
         run: yarn start:docker
 
+      - name: yarn docker:print-key
+        run: yarn docker:print-key
+
       - name: Install linux deps
         run: |
           sudo apt-get install --no-install-recommends -y \
