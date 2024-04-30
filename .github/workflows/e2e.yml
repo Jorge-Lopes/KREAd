@@ -25,8 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18.8.x"
-
-      - uses: c-hive/gha-yarn-cache@v2
+          cache: 'yarn'
 
       - name: yarn install
         run: yarn
