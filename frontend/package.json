@@ -54,7 +54,9 @@
     "test": "jest",
     "test:e2e": "EXTENSION=keplr synpress run --configFile=test/e2e/synpress.config.js --noExit",
     "test:ope2e": "EXTENSION=keplr synpress open --configFile=test/e2e/synpress.config.js",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
+    "start:docker": "docker compose -f ./test/e2e/docker-compose.yml up  -d",
+    "docker:print-key": "docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1'"
   },
   "browserslist": {
     "production": [
