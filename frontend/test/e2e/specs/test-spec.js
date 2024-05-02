@@ -1,48 +1,102 @@
 /* eslint-disable ui-testing/no-disabled-tests */
 
+const localChainConfig = {
+    "rpc": "http://localhost:26657",
+    "rest": "http://localhost:1317",
+    "chainId": "agoriclocal",
+    "chainName": "Agoric localhost",
+    "stakeCurrency": {
+      "coinDenom": "BLD",
+      "coinMinimalDenom": "ubld",
+      "coinDecimals": 6,
+      "gasPriceStep": {
+        "low": 0,
+        "average": 0,
+        "high": 0
+      }
+    },
+    "walletUrlForStaking": "https://wallet.agoric.app.staking.agoric.app",
+    "bip44": {
+      "coinType": 564
+    },
+    "bech32Config": {
+      "bech32PrefixAccAddr": "agoric",
+      "bech32PrefixAccPub": "agoricpub",
+      "bech32PrefixValAddr": "agoricvaloper",
+      "bech32PrefixValPub": "agoricvaloperpub",
+      "bech32PrefixConsAddr": "agoricvalcons",
+      "bech32PrefixConsPub": "agoricvalconspub"
+    },
+    "currencies": [
+      {
+        "coinDenom": "BLD",
+        "coinMinimalDenom": "ubld",
+        "coinDecimals": 6,
+        "gasPriceStep": {
+          "low": 0,
+          "average": 0,
+          "high": 0
+        }
+      },
+      {
+        "coinDenom": "IST",
+        "coinMinimalDenom": "uist",
+        "coinDecimals": 6,
+        "gasPriceStep": {
+          "low": 0,
+          "average": 0,
+          "high": 0
+        }
+      }
+    ],
+    "feeCurrencies": [
+      {
+        "coinDenom": "IST",
+        "coinMinimalDenom": "uist",
+        "coinDecimals": 6,
+        "gasPriceStep": {
+          "low": 0,
+          "average": 0,
+          "high": 0
+        }
+      }
+    ],
+    "features": [
+      "stargate",
+      "ibc-transfer"
+    ]
+  };
+
 describe('DAPP Offer Up E2E Test Cases', () => {
     context('Test commands', () => {
+      it('should ', () => {
+        cy.visit('/');
+        cy.window().then(cyWindow => {
+            cyWindow.keplr.experimentalSuggestChain(localChainConfig)
+            return null;
+          }
+        ).then(() => cy.acceptAccess());
+        cy.contains('connect Keplr Wallet').click();
+        cy.acceptAccess().then(taskCompleted => {
+          expect(taskCompleted).to.be.true;
+        });
+      });
+
       it(`should complete Keplr setup by importing an existing wallet using private key`, () => {
         cy.setupWallet({
           privateKey: Cypress.env('PRIVATE_KEY'),
           password : 'Test1234',
           newAccount: true,
           walletName: 'Kread test wallet',
-          selectedChains : [], // ['Agoric localhost']
+          selectedChains : ['Agoric localhost'],
           createNewWallet : false,
         }).then(setupFinished => {
           expect(setupFinished).to.be.true;
         });
       });
 
-      it(`should connect with Agoric Chain`, () => {
-        cy.origin('https://wallet.agoric.app/', () => {
-          cy.visit('/');
-        });
-        cy.acceptAccess().then(taskCompleted => {
-          expect(taskCompleted).to.be.true;
-        });
-
-        cy.origin('https://wallet.agoric.app/', () => {
-          cy.visit('/wallet/');
-
-          cy.get('input.PrivateSwitchBase-input').click();
-          cy.contains('Proceed').click();
-
-          cy.get('button[aria-label="Settings"]').click();
-
-          cy.get('#demo-simple-select').click();
-          cy.get('li[data-value="local"]').click();
-          cy.contains('button', 'Connect').click();
-        });
-
-        cy.acceptAccess().then(taskCompleted => {
-          expect(taskCompleted).to.be.true;
-        });
-      });
-
       it(`should get wallet address for Agoric`, () => {
-        cy.getWalletAddress('Agoric wallet').then(walletAddress => {
+        cy.getWalletAddress('Agoric localhost').then(walletAddress => {
           expect(walletAddress.length).to.be.equal(45);
         });
       });
@@ -53,14 +107,6 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         });
         cy.getTokenAmount('IST').then(tokenValue => {
           expect(tokenValue).to.gte(20);
-        });
-      });
-
-      it(`should accept connection with wallet`, () => {
-        cy.visit('/');
-        cy.contains('connect Keplr Wallet').click();
-        cy.acceptAccess().then(taskCompleted => {
-          expect(taskCompleted).to.be.true;
         });
       });
 
@@ -81,7 +127,6 @@ describe('DAPP Offer Up E2E Test Cases', () => {
         cy.get('[data-cy="buy-confirm"]').should('be.enabled').click();
 
         cy.get('[data-cy="confirm-check"]').click();
-
       });
 
       it(`should create new character`, () => {
