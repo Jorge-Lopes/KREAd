@@ -31,7 +31,7 @@ export const DetailSectionHeaderNavigation: FC<HeaderNavigationProps> = ({ actio
         </SecondaryButton>
       )}
 
-      {!!onClose && <ButtonClose onClick={() => onClose()} />}
+      {!!onClose && <ButtonClose data-cy="close-button" onClick={() => onClose()} />}
     </DetailSectionHeaderNavigationWrap>
   );
 };

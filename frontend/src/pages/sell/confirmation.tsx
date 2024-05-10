@@ -36,7 +36,7 @@ export const Confirmation: FC<Props> = ({ text, confirmationPath, data }) => {
         <FormText>{text.successLong}</FormText>
       </InfoContainer>
       <ButtonContainer>
-        <PrimaryButton onClick={() => navigate(confirmationPath)}>
+        <PrimaryButton data-cy="confirm-check-button" onClick={() => navigate(confirmationPath)}>
           <ButtonText customColor={color.white}>{text.check}</ButtonText>
           <ArrowUp />
         </PrimaryButton>

@@ -40,10 +40,8 @@ export const LeftEquippedItemCard: FC<EquippedItemCardProps> = ({
     setSelectedAsset(item?.name || "None");
   };
 
-  const id = item?.category ? `${item.category}Button` : "";
-
   return (
-    <EquippedContainer id={id} onClick={() => handleClick()} isRight={false}>
+    <EquippedContainer onClick={() => handleClick()} isRight={false}>
       <ItemCard
         position="left"
         area={area}

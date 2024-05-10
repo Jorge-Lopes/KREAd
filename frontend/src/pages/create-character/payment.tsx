@@ -48,7 +48,7 @@ export const Payment: FC<PaymentProps> = ({ submit, sendOfferHandler, isOfferAcc
             {!sendOffer && (
               <>
                 <PriceInIst price={MINTING_COST} />
-                <PrimaryButton onClick={sendOfferToWallet} disabled={disable}>
+                <PrimaryButton data-cy="send-offer-button" onClick={sendOfferToWallet} disabled={disable}>
                   <ButtonText customColor={color.white}>{text.mint.sendOffer}</ButtonText>
                 </PrimaryButton>
               </>
@@ -79,7 +79,7 @@ export const Payment: FC<PaymentProps> = ({ submit, sendOfferHandler, isOfferAcc
           </PreviousButtonContainer>
         )}
         <ButtonContainer>
-          <PrimaryButton onClick={() => submit(CONFIRMATION_STEP)} disabled={!isOfferAccepted}>
+          <PrimaryButton data-cy="confirm-offer-button" onClick={() => submit(CONFIRMATION_STEP)} disabled={!isOfferAccepted}>
             <ButtonText customColor={color.white}>{text.mint.confirm}</ButtonText>
             {isLoading ? <LoadingPage /> : <ArrowUp />}
           </PrimaryButton>

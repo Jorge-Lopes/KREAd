@@ -56,7 +56,7 @@ export const SellForm: FC<SellFormProps> = ({ data, changeStep, onSubmit, isPlac
             {isOnFirstStep && <PriceInIst price={ISTTouIST(data.price)} />}
           </PricingContainer>
           {isOnFirstStep && (
-            <PrimaryButton onClick={() => onSendOfferClickHandler()} disabled={isDisabled}>
+            <PrimaryButton data-cy="send-offer-button" onClick={() => onSendOfferClickHandler()} disabled={isDisabled}>
               <ButtonText customColor={color.white}>{text.mint.sendOffer}</ButtonText>
             </PrimaryButton>
           )}
@@ -83,7 +83,7 @@ export const SellForm: FC<SellFormProps> = ({ data, changeStep, onSubmit, isPlac
           </PreviousButtonContainer>
         )}
         <ButtonContainer>
-          <PrimaryButton onClick={() => changeStep(CONFIRMATION_STEP)} disabled={!isPlacedInShop}>
+          <PrimaryButton data-cy="confirm-offer-button" onClick={() => changeStep(CONFIRMATION_STEP)} disabled={!isPlacedInShop}>
             <ButtonText customColor={color.white}>{text.mint.confirm}</ButtonText>
             {isOfferPending ? <LoadingPage /> : <ArrowUp />}
           </PrimaryButton>

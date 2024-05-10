@@ -99,15 +99,15 @@ export const ItemCardInventory: FC<Props> = ({ item, selectItem }) => {
           </AssetStatsContainer>
           <AssetFooter>
             {item.equippedTo ? (
-              <PrimaryButton onClick={(event: React.MouseEvent<HTMLButtonElement>) => unequipAsset(event)}>
+              <PrimaryButton data-cy="unequip-item-button" onClick={(event: React.MouseEvent<HTMLButtonElement>) => unequipAsset(event)}>
                 <ButtonText customColor={color.white}>unequip</ButtonText>
               </PrimaryButton>
             ) : (
               <>
-                <PrimaryButton onClick={(event: React.MouseEvent<HTMLButtonElement>) => equipAsset(event)}>
+                <PrimaryButton data-cy="equip-item-button" onClick={(event: React.MouseEvent<HTMLButtonElement>) => equipAsset(event)}>
                   <ButtonText customColor={color.white}>equip</ButtonText>
                 </PrimaryButton>
-                <PrimaryButton onClick={(event) => sellAsset(event)}>
+                <PrimaryButton data-cy="sell-item-button" onClick={(event) => sellAsset(event)}>
                   <ButtonText customColor={color.white}>{text.general.sell}</ButtonText>
                 </PrimaryButton>
               </>

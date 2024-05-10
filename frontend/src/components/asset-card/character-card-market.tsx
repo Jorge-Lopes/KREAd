@@ -80,7 +80,7 @@ export const CharacterCardMarket: FC<Props> = ({ characterInMarket, onClick }) =
           <AssetFooter>
             <PriceContainer>
               <PriceInIst price={totalPrice} />
-              <PrimaryButton onClick={(event) => buyAsset(event)}>
+              <PrimaryButton data-cy="buy-character-button" onClick={(event) => buyAsset(event)}>
                 <ButtonText customColor={color.white}>{text.general.buy}</ButtonText>
               </PrimaryButton>
             </PriceContainer>
