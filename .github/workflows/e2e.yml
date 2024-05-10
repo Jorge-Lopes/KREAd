@@ -55,8 +55,8 @@ jobs:
       - name: Print user2 private key
         run: yarn docker:print-user2-key
 
-      - name: Provision user2
-        run: yarn docker:provision-user2
+       # - name: Provision user2
+       #   run: yarn docker:provision-user2
 
       - name: Install linux deps
         run: |
