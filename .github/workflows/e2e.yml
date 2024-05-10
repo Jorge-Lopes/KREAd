@@ -46,11 +46,17 @@ jobs:
       - name: yarn install
         run: yarn
 
-      - name: yarn start:docker
+      - name: Start local chain
         run: yarn start:docker
 
-      - name: yarn docker:print-key
-        run: yarn docker:print-key
+      - name: Print user1 private key
+        run: yarn docker:print-user1-key
+
+      - name: Print user2 private key
+        run: yarn docker:print-user2-key
+
+      - name: Provision user2
+        run: yarn docker:provision-user2
 
       - name: Install linux deps
         run: |
@@ -76,7 +82,8 @@ jobs:
           browser: chrome
         env:
           DISPLAY: :0.0
-          CYPRESS_PRIVATE_KEY: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069"
+          CYPRESS_PRIVATE_KEY_USER_1: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069" 
+          CYPRESS_PRIVATE_KEY_USER_2: "d239e07ca631c6d1051de5725dc5bdab8b937ba6979be011c55b22e87c4b499f"
           PRIVATE_KEY: "b3209e3771c0d97434ed4f9d6c223a442d1241968fd1f1b0e03e755b92339069"
 
       - name: Archive e2e artifacts
