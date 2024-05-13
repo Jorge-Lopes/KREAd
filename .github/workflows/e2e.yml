@@ -51,19 +51,20 @@ jobs:
 
       - name: Print user1 address
         id: print_user1_address
-        run: echo "::set-output name=user1_address::$(docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address')"
+        run: echo "user1_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address')" >> $GITHUB_OUTPUT
 
       - name: Print user1 private key
         id: print_user1_private_key
-        run: echo "::set-output name=user1_private_key::$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1')"
+        run: echo "user1_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1')" >> $GITHUB_OUTPUT
 
       - name: Print user2 address
         id: print_user2_address
-        run: echo "::set-output name=user2_address::$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')"
+        run: echo "user2_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')" >> $GITHUB_OUTPUT
 
       - name: Print user2 private key
         id: print_user2_private_key
-        run: echo "::set-output name=user2_private_key::$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')"
+        run: echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_OUTPUT
+
 
       # - name: Provision user2
       #   run: docker exec e2e-agd-1 bash -c 'agd tx bank send ${{ steps.print_user1_address.outputs.user1_address }} ${{ steps.print_user2_address.outputs.user2_address }} 15000000uist --keyring-backend=test --chain-id=agoriclocal --gas=auto --gas-adjustment=1.2 --yes -b block'
