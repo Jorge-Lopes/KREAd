@@ -66,8 +66,8 @@ jobs:
         run: echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_ENV
 
 
-      # - name: Provision user2
-      #   run: docker exec e2e-agd-1 bash -c 'agd tx bank send ${{ steps.print_user1_address.outputs.user1_address }} ${{ steps.print_user2_address.outputs.user2_address }} 15000000uist --keyring-backend=test --chain-id=agoriclocal --gas=auto --gas-adjustment=1.2 --yes -b block'
+      - name: Provision user2
+        run: sleep 10 && docker exec e2e-agd-1 bash -c 'agd tx bank send ${{ env.user1_address }} ${{ user2_address }} 15000000uist --keyring-backend=test --chain-id=agoriclocal --gas=auto --gas-adjustment=1.2 --yes -b block'
 
       - name: Install linux deps
         run: |
