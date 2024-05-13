@@ -51,19 +51,19 @@ jobs:
 
       - name: Print user1 address
         id: print_user1_address
-        run: echo "user1_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address')" >> $GITHUB_OUTPUT
+        run: echo "user1_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address')" >> $GITHUB_ENV
 
       - name: Print user1 private key
         id: print_user1_private_key
-        run: echo "user1_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1')" >> $GITHUB_OUTPUT
+        run: echo "user1_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1')" >> $GITHUB_ENV
 
       - name: Print user2 address
         id: print_user2_address
-        run: echo "user2_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')" >> $GITHUB_OUTPUT
+        run: echo "user2_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')" >> $GITHUB_ENV
 
       - name: Print user2 private key
         id: print_user2_private_key
-        run: echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_OUTPUT
+        run: echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_ENV
 
 
       # - name: Provision user2
@@ -93,9 +93,9 @@ jobs:
           browser: chrome
         env:
           DISPLAY: :0.0
-          CYPRESS_USER1_PRIVATE_KEY: ${{ steps.print_user1_private_key.outputs.user1_private_key }} 
-          CYPRESS_USER2_PRIVATE_KEY: ${{ steps.print_user2_private_key.outputs.user2_private_key }}
-          PRIVATE_KEY: ${{ steps.print_user1_private_key.outputs.user1_private_key }}
+          CYPRESS_USER1_PRIVATE_KEY: ${{ env.user1_private_key }} 
+          CYPRESS_USER2_PRIVATE_KEY: ${{ env.user2_private_key }}
+          PRIVATE_KEY: ${{ env.user1_private_key }}
 
       - name: Archive e2e artifacts
         uses: actions/upload-artifact@v4
