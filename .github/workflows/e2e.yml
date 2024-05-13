@@ -49,14 +49,20 @@ jobs:
       - name: Start local chain
         run: yarn start:docker
 
+      - name: Print user1 address
+        run: docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address'
+
       - name: Print user1 private key
-        run: yarn docker:print-user1-key
+        run: docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1'
+
+      - name: Print user2 address
+        run: docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address'
 
       - name: Print user2 private key
-        run: yarn docker:print-user2-key
+        run: docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2'
 
       - name: Provision user2
-        run: yarn docker:provision-user2
+        run: docker exec e2e-agd-1 bash -c 'agd tx bank send user1 agoric1san5qxufg5hsxwdurtkhgqq0pmmp0848c459xm 15000000uist --keyring-backend=test --chain-id=agoriclocal --gas=auto --gas-adjustment=1.2 --yes -b block'
 
       - name: Install linux deps
         run: |
