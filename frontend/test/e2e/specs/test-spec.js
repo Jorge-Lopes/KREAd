@@ -178,14 +178,14 @@ describe("DAPP Offer Up E2E Test Cases", () => {
       cy.get('[data-cy="confirm-check-button"]').click();
     });
 
-    it.skip(`should equip Item`, () => {
-      cy.visit("/inventory/items");
-      cy.get('[data-cy="equip-item-button"]').first().click();
-      cy.confirmTransaction().then((taskCompleted) => {
-        expect(taskCompleted).to.be.true;
-      });
-      cy.get('[data-cy="close-notification-button"]').click();
-    });
+    // it(`should equip Item`, () => {
+    //   cy.visit("/inventory/items");
+    //   cy.get('[data-cy="equip-item-button"]').first().click();
+    //   cy.confirmTransaction().then((taskCompleted) => {
+    //     expect(taskCompleted).to.be.true;
+    //   });
+    //   cy.get('[data-cy="close-notification-button"]').click();
+    // });
 
     it(`should sell Character`, () => {
       cy.visit("/inventory/characters");
@@ -233,7 +233,7 @@ describe("DAPP Offer Up E2E Test Cases", () => {
         });
     });
 
-    it.skip(`should complete Keplr setup by importing User2 wallet using private key`, () => {
+    it(`should complete Keplr setup by importing User2 wallet using private key`, () => {
       cy.setupWallet({
         privateKey: Cypress.env("USER2_PRIVATE_KEY"),
         password: "Test1234",
@@ -246,13 +246,7 @@ describe("DAPP Offer Up E2E Test Cases", () => {
       });
     });
 
-    it.skip(`should get wallet address for Agoric`, () => {
-      cy.getWalletAddress("Agoric localhost").then((walletAddress) => {
-        expect(walletAddress.length).to.be.equal(45);
-      });
-    });
-
-    it.skip("should buy Character", () => {
+    it("should buy Character", () => {
       cy.visit("/shop/characters");
 
       cy.get('[data-cy="buy-character-button"]')
@@ -273,13 +267,11 @@ describe("DAPP Offer Up E2E Test Cases", () => {
       cy.get('[data-cy="confirm-check-button"]').click();
     });
 
-    it.skip("should buy Item", () => {
+    it("should buy Item", () => {
       cy.visit("/shop/items");
 
-      cy.get('[data-cy="itemsCards"]')
-        .children()
+      cy.get('[data-cy="buy-item-button"]')
         .first()
-        .find('[data-cy="buy-item-button"]')
         .click()
         .get('[data-cy="send-buy-offer-button"]')
         .should("exist")
