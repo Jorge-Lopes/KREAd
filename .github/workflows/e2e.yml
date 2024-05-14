@@ -49,22 +49,13 @@ jobs:
       - name: Start local chain
         run: yarn start:docker
 
-      - name: Print user1 address
-        id: print_user1_address
-        run: echo "user1_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address')" >> $GITHUB_ENV
-
-      - name: Print user1 private key
-        id: print_user1_private_key
-        run: echo "user1_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1')" >> $GITHUB_ENV
-
-      - name: Print user2 address
-        id: print_user2_address
-        run: echo "user2_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')" >> $GITHUB_ENV
-
-      - name: Print user2 private key
-        id: print_user2_private_key
-        run: echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_ENV
-
+      - name: Print wallets credentials
+        id: print_wallet_credentials
+        run: | 
+          echo "user1_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user1 --keyring-backend=test --address')" >> $GITHUB_ENV
+          echo "user1_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1')" >> $GITHUB_ENV
+          echo "user2_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')" >> $GITHUB_ENV
+          echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_ENV
 
       - name: Provision user2
         run: sleep 60 && docker exec e2e-agd-1 bash -c 'agd tx bank send ${{ env.user1_address }} ${{ env.user2_address }} 15000000uist --keyring-backend=test --chain-id=agoriclocal --gas=auto --gas-adjustment=1.2 --yes -b block'
