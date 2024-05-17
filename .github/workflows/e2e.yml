@@ -57,11 +57,11 @@ jobs:
           echo "user2_address=$(docker exec e2e-agd-1 bash -c 'agd keys show user2 --keyring-backend=test --address')" >> $GITHUB_ENV
           echo "user2_private_key=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2')" >> $GITHUB_ENV
 
-      - name: Provision user2
+      - name: Fund user2
         run: |
           sleep 60
           chmod +x ./test/e2e/scripts/fund-user2.sh
-         ./test/e2e/scripts/fund-user2.sh
+          ./test/e2e/scripts/fund-user2.sh
 
       - name: Install linux deps
         run: |
