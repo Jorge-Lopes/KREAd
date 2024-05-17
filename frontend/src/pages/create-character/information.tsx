@@ -60,7 +60,7 @@ export const Information: FC<InformationProps> = ({ setData, disabled }) => {
         <FormFields>
           <Label>{text.mint.characterName}</Label>
           <InputWrapper>
-            <Input type="text" {...register("name", 
+            <Input data-cy="new-character-input" type="text" {...register("name", 
             { 
               required: true,
               maxLength: MAX_CHARACTER_LENGTH, 
@@ -103,7 +103,7 @@ export const Information: FC<InformationProps> = ({ setData, disabled }) => {
         <FormText>{text.mint.theCostsOfMinting}</FormText>
         <ButtonWrapper>
           <ButtonContainer>
-            <PrimaryButton type="submit" disabled={!isValid || disabled || notEnoughIST || nameTaken}>
+            <PrimaryButton data-cy="next-button" type="submit" disabled={!isValid || disabled || notEnoughIST || nameTaken}>
               <ButtonText customColor={color.white}>{text.mint.next}</ButtonText>
               <ArrowUp />
             </PrimaryButton>

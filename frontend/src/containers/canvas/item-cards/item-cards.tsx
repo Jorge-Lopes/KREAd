@@ -75,6 +75,7 @@ export const ItemCards: FC<Props> = ({ equipped, unequipped, equippedSelected, s
         {filteredItems
           ? unequipped.inCategory.map((item, index) => (
               <ItemCardContainer
+                id="unequippedItemButton"
                 key={index}
                 isSelected={!equippedSelected && index === selectedAssetIndex}
                 onClick={() => {

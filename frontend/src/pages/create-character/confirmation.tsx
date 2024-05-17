@@ -42,7 +42,7 @@ export const Confirmation: FC<ConfirmationProps> = ({ character }) => {
         <MenuItemName>{getDatefromEpoch(Date.now())}</MenuItemName>
       </InfoContainer>
       <ButtonContainer>
-        <PrimaryButton onClick={handleConfirm}>
+        <PrimaryButton data-cy="visit-character-button" onClick={handleConfirm}>
           <ButtonText customColor={color.white}>{text.mint.goToCharacter}</ButtonText>
           <ArrowUp />
         </PrimaryButton>

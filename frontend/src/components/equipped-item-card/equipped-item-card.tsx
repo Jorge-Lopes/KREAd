@@ -79,8 +79,10 @@ export const RightEquippedItemCard: FC<EquippedItemCardProps> = ({
     setSelectedAsset(item?.name || "None");
   };
 
+  const id = item?.category ? `${item.category}Button` : "";
+
   return (
-    <EquippedContainer onClick={() => handleClick()} isRight isSecond={code === "perk 1" || code === "filter 1"}>
+    <EquippedContainer id={id} onClick={() => handleClick()} isRight isSecond={code === "perk 1" || code === "filter 1"} >
       <ItemCard
         position="right"
         area={area}

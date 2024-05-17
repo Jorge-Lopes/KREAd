@@ -42,7 +42,8 @@ export const Information: FC<InformationProps> = ({ setData, data }) => {
           <InputWrapper>
             <InputContainer>
               <TextLabel>
-                <Input
+                <Input 
+                  data-cy="sell-price-input"
                   type="number"
                   defaultValue=""
                   placeholder="IST"
@@ -74,7 +75,7 @@ export const Information: FC<InformationProps> = ({ setData, data }) => {
         </FormFields>
         <SellDescription price={Number(price)} />
         <ButtonContainer>
-          <PrimaryButton type="submit" disabled={!isValid}>
+          <PrimaryButton data-cy="next-button" type="submit" disabled={!isValid}>
             <ButtonText customColor={color.white}>{text.general.next}</ButtonText>
           </PrimaryButton>
         </ButtonContainer>

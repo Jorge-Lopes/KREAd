@@ -143,7 +143,7 @@ export const networkOptions = [
   { label: "emerynet", value: "https://emerynet.agoric.net/network-config" },
   { label: "mainnet", value: "https://main.agoric.net/network-config" },
 ] as const;
-export const DEFAULT_NETWORK_CONFIG = import.meta.env.VITE_NETWORK_CONFIG || ("https://emerynet.agoric.net/network-config" as const);
+export const DEFAULT_NETWORK_CONFIG = "https://wallet.agoric.app/wallet/network-config" as const;
 export const NETWORK_CONFIG = import.meta.env.VITE_NETWORK_CONFIG || ("https://main.agoric.net/network-config" as const);
 
 export const localBridgeHref = "http://localhost:3000/wallet/bridge.html" as const;

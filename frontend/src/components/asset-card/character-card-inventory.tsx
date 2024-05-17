@@ -72,7 +72,7 @@ export const CharacterCardInventory: FC<Props> = ({ extendedCharacter, onClick }
             </Badge>
           </AssetStatsContainer>
           <AssetFooter>
-            <PrimaryButton onClick={(event) => sellAsset(event)}>
+            <PrimaryButton data-cy="sell-character-button" onClick={(event) => sellAsset(event)}>
               <ButtonText customColor={color.white}>{text.general.sell}</ButtonText>
             </PrimaryButton>
           </AssetFooter>

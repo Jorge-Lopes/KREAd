@@ -40,7 +40,7 @@ export const NotificationDetail: FC<NotificationDetailProps> = ({ isError, title
         <ReturnContainer>
           <Divider />
           <ArrowContainer>
-            <Close onClick={() => closeToast()} />
+            <Close data-cy="close-notification-button" onClick={() => closeToast()} />
           </ArrowContainer>
         </ReturnContainer>
       </DividerContainer>

@@ -36,12 +36,12 @@ export const OverviewEmpty: FC<OverviewProps> = ({
       <MenuText>{headingText || text.general.dataNotFound}</MenuText>
       <BodyText>{descriptionText || text.general.thereAreNoAssetsAvailable}</BodyText>
       {buttonText && secondary && (
-        <SecondaryButton onClick={() => handleButtonClick()}>
+        <SecondaryButton data-cy="new-character-button" onClick={() => handleButtonClick()}>
           <ButtonText customColor={color.white}>{buttonText || text.general.goHome}</ButtonText>
         </SecondaryButton>
       )}
       {buttonText && !secondary && (
-        <PrimaryButton onClick={() => handleButtonClick()}>
+        <PrimaryButton data-cy="new-character-button" onClick={() => handleButtonClick()}>
           <ButtonText customColor={color.white}>{buttonText || text.general.goHome}</ButtonText>
         </PrimaryButton>
       )}
