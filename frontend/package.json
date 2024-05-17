@@ -55,9 +55,9 @@
     "test:e2e": "EXTENSION=keplr synpress run --configFile=test/e2e/synpress.config.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
     "start:docker": "docker compose -f ./test/e2e/docker-compose.yml up  -d",
-    "docker:print-user1-key": "docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1'",
-    "docker:print-user2-key": "docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2'",
-    "docker:provision-user2": "docker exec e2e-agd-1 bash -c 'agd tx bank send user1 agoric1san5qxufg5hsxwdurtkhgqq0pmmp0848c459xm 15000000uist --keyring-backend=test --chain-id=agoriclocal --gas=auto --gas-adjustment=1.2 --yes -b block'"
+    "docker:print-user1-key": "user1_pk=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user1') && sed -i '' \"s|\\\"USER1_PRIVATE_KEY\\\": \\\"[^\\\"]*\\\"|\\\"USER1_PRIVATE_KEY\\\": \\\"$user1_pk\\\"|\" cypress.env.json",
+    "docker:print-user2-key": "user2_pk=$(docker exec e2e-agd-1 bash -c 'yes | agd keys export --unsafe --unarmored-hex --keyring-backend=test user2') && sed -i '' \"s|\\\"USER2_PRIVATE_KEY\\\": \\\"[^\\\"]*\\\"|\\\"USER2_PRIVATE_KEY\\\": \\\"$user2_pk\\\"|\" cypress.env.json",
+    "docker:fund-user2": "./test/e2e/scripts/fund-user2.sh"
   },
   "browserslist": {
     "production": [
