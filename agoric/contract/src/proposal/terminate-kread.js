@@ -50,7 +50,7 @@ export const getManifest = _powers => {
 /** @type {import('@agoric/deploy-script-support/src/externalTypes.js').CoreEvalBuilder} */
 export const defaultProposalBuilder = async () =>
   harden({
-    sourceSpec: '/Users/jorgelopes/Projects/Agoric/kread/agoric/contract/src/proposal/terminate-kread.js',
+    sourceSpec: './terminate-kread.js',
     getManifestCall: ['getManifest'],
   });
 
